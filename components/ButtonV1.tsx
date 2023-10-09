@@ -1,12 +1,8 @@
 import { FC } from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { TStyled } from "../types/others";
+import { colors } from "../configs/colors";
 
-// TStyled
-// FC
-// {{...styles, ...otherStyles}} -> [styles, othersStyles]
-// TSetState
-// useState<>
 
 type TProps = TStyled & {
   title: string;
@@ -18,7 +14,7 @@ export const ButtonV1: FC<TProps> = (props) => {
   const { title, onPress, disabled, style } = props;
   return (
     <TouchableOpacity
-      style={{ ...styles.button, ...style }}
+      style={[styles.button, style]}
       onPress={onPress}
       disabled={disabled}
     >
@@ -31,7 +27,7 @@ const styles = StyleSheet.create({
   button: {
     width: "45%",
     height: 50,
-    backgroundColor: "#3f7bcf",
+    backgroundColor: colors.purple,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,

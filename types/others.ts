@@ -3,9 +3,8 @@ import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 export type TElement = any;
 export type TStyles = ViewStyle | TextStyle | ImageStyle;
+export type TStyled = { style?: TStyles };
 export type TOnChangeText = (text: string) => void;
-export type TSetBoolean = Dispatch<SetStateAction<boolean>>;
-
 export type TSetState<T> = Dispatch<SetStateAction<T>>;
 
 export type TUser = {
@@ -15,4 +14,4 @@ export type TUser = {
   email: string;
   avatar: string;
 };
-export type TStyled = { style?: TStyles };
+

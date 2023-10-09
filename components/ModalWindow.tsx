@@ -1,16 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { FC } from "react"
 import { View, Text, StyleSheet, Modal } from "react-native";
-import { TSetBoolean } from "../types/others";
+import { TSetState } from "../types/others";
 import { ButtonV1 } from "./ButtonV1";
 
 type TProps = {
   modalVisible: boolean
-  setModalVisible: TSetBoolean
+  setModalVisible: TSetState<boolean>
   error: string
-  setError: Dispatch<SetStateAction<string>>
+  setError: TSetState<string>
 }
 
-export const ModalWindow = (props: TProps) => {
+export const ModalWindow: FC<TProps> = (props) => {
   const { modalVisible, setModalVisible, error, setError } = props
 
   const closeModalWindow = (): void => {
@@ -24,6 +24,7 @@ export const ModalWindow = (props: TProps) => {
         <View style={styles.modalView}>
           <Text>{error}</Text>
           <ButtonV1
+            style={{ height: 40 }}
             onPress={closeModalWindow}
             title="Закрыть"
             disabled={false}
@@ -41,10 +42,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "85%",
-    marginTop: "85%",
+    marginTop: "15%",
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",

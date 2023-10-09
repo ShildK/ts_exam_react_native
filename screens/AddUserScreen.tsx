@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, FC } from "react";
 import { UsersContext } from "../contexts/UsersContext";
 import { useNavigation } from "@react-navigation/native";
 import uuid from "react-native-uuid";
@@ -13,10 +13,10 @@ const generateId = (): string => {
   return `${uuid.v4()}`;
 };
 
-export const AddUserScreen = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+export const AddUserScreen: FC = () => {
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   const { users, setUsers } = useContext(UsersContext);
   const navigation = useNavigation<AddUserScreenNavigationProp>();
@@ -29,7 +29,7 @@ export const AddUserScreen = () => {
       email,
       avatar: "https://clipart-library.com/images/ATbrxjpyc.jpg",
     };
-    setUsers([...users, newUser]);
+    setUsers([newUser, ...users]);
     navigation.navigate("UsersScreen");
   };
 

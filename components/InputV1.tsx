@@ -1,23 +1,22 @@
+import { FC } from "react";
 import { TextInput, StyleSheet } from "react-native";
-import { TOnChangeText, TStyles } from "../types/others";
+import { TOnChangeText, TStyled } from "../types/others";
 
-type TProps = {
+type TProps = TStyled & {
   placeholder: string;
   onChangeText: TOnChangeText;
   value: string;
-  style?: TStyles;
 };
 
-export const InputV1 = (props: TProps) => {
-  const { placeholder, onChangeText, value, style, ...rest } = props;
+export const InputV1: FC<TProps> = (props) => {
+  const { placeholder, onChangeText, value, style } = props;
 
   return (
     <TextInput
-      style={{ ...styles.input, ...style }}
+      style={[styles.input, style]}
       placeholder={placeholder}
       onChangeText={onChangeText}
       value={value}
-      {...rest}
     />
   );
 };

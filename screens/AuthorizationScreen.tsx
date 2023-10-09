@@ -1,54 +1,95 @@
-import { useContext, useState } from "react";
+import { useContext, useState, FC } from "react";
+import { ImageBackground, StyleSheet, Text } from "react-native";
+
 import { ButtonV1 } from "../components/ButtonV1";
-import { InputV1 } from "../components/InputV1";
 import { Layout } from "../components/Layout";
 import { ModalWindow } from "../components/ModalWindow";
 import { UsersContext } from "../contexts/UsersContext";
+import { SignInWindow } from "../components/SignInWindow";
+import { colors } from "../configs/colors";
+// import { BackgroundDetails } from "../components/BackgroundDetails";
+// import { ImageBackgroundV1 } from "../components/ImageBacgroundV1";
 
-export const AuthorizationScreen = () => {
-  const { users, setIsAuthorized } = useContext(UsersContext);
+export const AuthorizationScreen: FC = () => {
+   const { users, setIsAuthorized } = useContext(UsersContext);
+   // const [error, setError] = useState<string>("");
+   // const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+   const [signInWindowVisible, setSignInWindowVisible] =
+      useState<boolean>(false);
+   //  const [email, setEmail] = useState<string>("");
+   //  const [password, setPassword] = useState<string>("");
+   //  const [error, setError] = useState<string>("");
 
-  const [error, setError] = useState<string>("");
+   // const searchUser = (): void => {
+   //    const user = users.find((user) => user.email === email);
 
-  const searchUser = (): void => {
-    const user = users.find((user) => user.email === email);
+   //    if (user) {
+   //       setIsAuthorized(true);
+   //    } else {
+   //       setModalVisible(true);
+   //       setError("Пользователь не найден");
+   //    }
+   // };
 
-    if (user) {
-      setIsAuthorized(true);  
-    } else {
-      setModalVisible(true);
-      setError("Пользователь не найден");
-    }
-  };
-
-  return (
-    <Layout style={{ justifyContent: "center", alignItems: "center" }}>
-      <InputV1
-        value={email}
-        placeholder="Email"
-        onChangeText={(email) => setEmail(email)}
-      />
-      <InputV1
-        value={password}
-        placeholder="Password"
-        onChangeText={(password) => setPassword(password)}
-      />
-      <ButtonV1
-        title="Sign in"
-        onPress={searchUser}
-        disabled={!(email && password)}
-      />
-      <ModalWindow
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        error={error}
-        setError={setError}
-      />
-    </Layout>
-  );
+   return (
+      <Layout style={{ alignItems: "center", padding: 0 }}>
+         <ImageBackground
+            source={require("../assets/bi.png")}
+            resizeMode="cover"
+            style={styles.image}
+         >
+            <Text style={styles.title}>Sign In</Text>
+            <Text style={styles.text}>
+               Welcome back to our app. Sign in to check out your friends
+            </Text>
+         </ImageBackground>
+         <SignInWindow
+            signInWindowVisible={signInWindowVisible}
+            setSignInWindowVisible={setSignInWindowVisible}
+            // setModalVisible={setModalVisible}
+            // setError={setError}
+         />
+         {/* <ModalWindow
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            error={error}
+            setError={setError}
+         /> */}
+         <ButtonV1
+            style={styles.button}
+            title="Login"
+            onPress={() => setSignInWindowVisible(true)}
+            disabled={false}
+         />
+      </Layout>
+   );
 };
 
+const styles = StyleSheet.create({
+   image: {
+      width: "100%",
+      height: "83%",
+      alignItems: "center",
+      zIndex: 2,
+   },
+   title: {
+      fontSize: 72,
+      fontWeight: "700",
+      color: "white",
+      marginTop: "25%",
+   },
+   text: {
+      width: "80%",
+      fontSize: 18,
+      color: "#FDECFE",
+      fontWeight: "500",
+      textAlign: "center",
+      marginTop: "10%",
+   },
+   button: {
+      width: "50%",
+      borderRadius: 25,
+      zIndex: 3,
+   },
+});

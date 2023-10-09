@@ -1,14 +1,14 @@
 import { FC } from "react";
 import { View } from "react-native";
-import { TElement, TStyles } from "../types/others";
+import { TElement, TStyled } from "../types/others";
+import { colors } from "../configs/colors";
 
-type TProps = {
+type TProps = TStyled & {
   children: TElement;
-  style?: TStyles;
 };
 
 export const Layout: FC<TProps> = (props) => {
   const { children, style } = props;
 
-  return <View style={{ flex: 1, padding: 20, ...style }}>{children}</View>;
+  return <View style={{ flex: 1, padding: 20, backgroundColor: colors.white, ...style }}>{children}</View>;
 };

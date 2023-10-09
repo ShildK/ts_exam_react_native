@@ -1,13 +1,19 @@
+import { FC, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { UsersScreenNavigationProp } from "../types/navigationTypes";
-import { TUser } from "../types/others";
+import { TSetState, TUser } from "../types/others";
+import { colors } from "../configs/colors";
+import { shadows } from "../configs/shadows";
+import { borders } from "../configs/borders";
+import { UsersContext } from "../contexts/UsersContext";
 
 type TProps = {
   user: TUser;
 };
 
-export const User = (props: TProps) => {
+export const User: FC<TProps> = (props) => {
+  const { users, setUsers } = useContext(UsersContext);
   const { user } = props;
   const navigation = useNavigation<UsersScreenNavigationProp>();
 
@@ -15,8 +21,15 @@ export const User = (props: TProps) => {
     navigation.navigate("UserScreen", { user });
   };
 
+  const deleteUser = (): void => {
+    const userId = user.id
+    const newUsers = users.filter((user) => user.id !== userId);
+    setUsers(newUsers);
+ };
+
+
   return (
-    <TouchableOpacity style={styles.container} onPress={goToUserScreen}>
+    <TouchableOpacity style={styles.container} onLongPress={deleteUser} onPress={goToUserScreen}>
       <Image
         style={styles.image}
         source={{
@@ -24,52 +37,43 @@ export const User = (props: TProps) => {
         }}
       />
       <View style={styles.userInfo}>
-        <Text style={styles.text}>First name: {user.first_name}</Text>
-        <Text style={styles.text}>Last name: {user.last_name}</Text>
+        <Text style={styles.text}>{user.first_name} {user.last_name}</Text>
+        <Text style={styles.email}>{user.email}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export const colors = {
-  white: "#ffffff",
-  orange: "#872131",
-};
 
-export const shadows = {
-  shadow1: {
-    shadowOpacity: 0.35,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    elevation: 2,
-  },
-};
 
 const styles = StyleSheet.create({
   container: {
-    width: "95%",
+    width: "100%",
     padding: 20,
-    margin: 10,
     flexDirection: "row",
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    ...shadows.shadow1,
+    ...borders.bordersV1
+    // padding: 15,
+    // borderRadius: 10,
+    // backgroundColor: colors.white,
+    // ...shadows.shadow1
   },
+  
   image: {
-    width: 120,
-    height: 120,
+    width: 90,
+    height: 90,
     marginRight: 20,
     borderRadius: 100,
   },
   userInfo: {
-    marginTop: 15,
+    marginTop: 10,
   },
   text: {
-    marginVertical: 5,
-    fontSize: 16,
+    marginVertical: 3,
+    fontSize: 20,
     fontWeight: "600",
+  },
+  email: {
+    fontSize: 16,
+    color: "grey"
   },
 });
