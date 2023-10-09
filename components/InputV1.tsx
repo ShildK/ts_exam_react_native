@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { TextInput, StyleSheet } from "react-native";
+import { colors } from "../configs/colors";
+import { shadows } from "../configs/shadows";
 import { TOnChangeText, TStyled } from "../types/others";
 
 type TProps = TStyled & {
@@ -26,14 +28,8 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 15,
     borderRadius: 10,
-    backgroundColor: "#fff",
-    shadowOpacity: 0.35,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    elevation: 2,
+    backgroundColor: colors.white,
     marginBottom: 20,
+    ...shadows.shadow1
   },
 });

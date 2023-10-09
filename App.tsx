@@ -31,147 +31,80 @@ const App: FC = () => {
       })();
    }, []);
 
-   
+   const getRoutes = (): TElement => {
+      if (!loaded) {
+         return (
+            <Stack.Screen
+               options={{ title: "" }}
+               name="Loaded"
+               component={Loaded}
+            />
+         );
+      }
 
-   // const getRoutes = (): TElement => {
-   //    if (!loaded) {
-   //       return (
-   //          <Stack.Screen
-   //             options={{ title: "" }}
-   //             name="Loaded"
-   //             component={Loaded}
-   //          />
-   //       );
-   //    }
+      if (!isAuthorized) {
+         return (
+            <Stack.Screen
+               options={{ title: "Authorization", headerShown: false }}
+               name="AuthorizationScreen"
+               component={AuthorizationScreen}
+            />
+         );
+      }
 
-   //    if (!isAuthorized) {
-   //       return (
-   //          <Stack.Screen
-   //             options={{ title: "Authorization", headerShown: false }}
-   //             name="AuthorizationScreen"
-   //             component={AuthorizationScreen}
-   //          />
-   //       );
-   //    }
-
-   //    return (
-   //       <>
-   //          <Stack.Screen
-   //             options={{
-   //                title: "Users",
-   //                headerStyle: {
-   //                   backgroundColor: colors.backgroundColor,
-   //                },
-   //                headerTintColor: colors.white,
-   //                headerTitleStyle: {
-   //                   fontWeight: "bold",
-   //                },
-   //             }}
-   //             name="UsersScreen"
-   //             component={UsersScreen}
-   //          />
-   //          <Stack.Screen
-   //             options={{
-   //                title: "User",
-   //                headerStyle: {
-   //                   backgroundColor: colors.backgroundColor,
-   //                },
-   //                headerTintColor: colors.white,
-   //                headerTitleStyle: {
-   //                   fontWeight: "bold",
-   //                },
-   //             }}
-   //             name="UserScreen"
-   //             component={UserScreen}
-   //          />
-   //          <Stack.Screen
-   //             options={{
-   //                title: "Add new user",
-   //                headerStyle: {
-   //                   backgroundColor: colors.backgroundColor,
-   //                },
-   //                headerTintColor: colors.white,
-   //                headerTitleStyle: {
-   //                   fontWeight: "bold",
-   //                },
-   //             }}
-   //             name="AddUserScreen"
-   //             component={AddUserScreen}
-   //          />
-   //       </>
-   //    );
-   // };
+      return (
+         <>
+            <Stack.Screen
+               options={{
+                  title: "Users",
+                  headerStyle: {
+                     backgroundColor: colors.backgroundColor,
+                  },
+                  headerTintColor: colors.white,
+                  headerTitleStyle: {
+                     fontWeight: "bold",
+                  },
+               }}
+               name="UsersScreen"
+               component={UsersScreen}
+            />
+            <Stack.Screen
+               options={{
+                  title: "User",
+                  headerStyle: {
+                     backgroundColor: colors.backgroundColor,
+                  },
+                  headerTintColor: colors.white,
+                  headerTitleStyle: {
+                     fontWeight: "bold",
+                  },
+               }}
+               name="UserScreen"
+               component={UserScreen}
+            />
+            <Stack.Screen
+               options={{
+                  title: "Add new user",
+                  headerStyle: {
+                     backgroundColor: colors.backgroundColor,
+                  },
+                  headerTintColor: colors.white,
+                  headerTitleStyle: {
+                     fontWeight: "bold",
+                  },
+               }}
+               name="AddUserScreen"
+               component={AddUserScreen}
+            />
+         </>
+      );
+   };
 
    return (
       <UsersContext.Provider value={{ users, setUsers, setIsAuthorized }}>
          <NavigationContainer>
             <Stack.Navigator>
-               {/* {getRoutes()} */}
-               {!loaded ? (
-                  <Stack.Screen
-                     options={{ title: "" }}
-                     name="Loaded"
-                     component={Loaded}
-                  />
-               ) : (
-                  <>
-                     {!isAuthorized ? (
-                        <Stack.Screen
-                           options={{
-                              title: "Authorization",
-                              headerShown: false,
-                           }}
-                           name="AuthorizationScreen"
-                           component={AuthorizationScreen}
-                        />
-                     ) : (
-                        <>
-                           <Stack.Screen
-                              options={{
-                                 title: "Users",
-                                 headerStyle: {
-                                    backgroundColor: colors.backgroundColor,
-                                 },
-                                 headerTintColor: colors.white,
-                                 headerTitleStyle: {
-                                    fontWeight: "bold",
-                                 },
-                              }}
-                              name="UsersScreen"
-                              component={UsersScreen}
-                           />
-                           <Stack.Screen
-                              options={{
-                                 title: "User",
-                                 headerStyle: {
-                                    backgroundColor: colors.backgroundColor,
-                                 },
-                                 headerTintColor: colors.white,
-                                 headerTitleStyle: {
-                                    fontWeight: "bold",
-                                 },
-                              }}
-                              name="UserScreen"
-                              component={UserScreen}
-                           />
-                           <Stack.Screen
-                              options={{
-                                 title: "Add new user",
-                                 headerStyle: {
-                                    backgroundColor: colors.backgroundColor,
-                                 },
-                                 headerTintColor: colors.white,
-                                 headerTitleStyle: {
-                                    fontWeight: "bold",
-                                 },
-                              }}
-                              name="AddUserScreen"
-                              component={AddUserScreen}
-                           />
-                        </>
-                     )}
-                  </>
-               )}
+               {getRoutes()}
             </Stack.Navigator>
          </NavigationContainer>
       </UsersContext.Provider>

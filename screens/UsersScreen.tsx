@@ -16,17 +16,16 @@ import { User } from "../components/User";
 import { UsersContext } from "../contexts/UsersContext";
 import { UsersScreenNavigationProp } from "../types/navigationTypes";
 import { colors } from "../configs/colors";
+import { shadows } from "../configs/shadows";
 
 export const UsersScreen: FC = () => {
-   const { users, setUsers } = useContext(UsersContext);
+   const { users } = useContext(UsersContext);
    const [searchInput, setSearchInput] = useState<string>("");
    const navigation = useNavigation<UsersScreenNavigationProp>();
 
    const foundUsers = users.filter((user) =>
       user.first_name.includes(searchInput)
    );
-
-   
 
    return (
       <Layout style={{padding: 0}}>
@@ -70,27 +69,6 @@ const styles = StyleSheet.create({
       bottom: 65,
       backgroundColor: colors.white,
       borderRadius: 10,
-      shadowOpacity: 0.35,
-      shadowRadius: 3,
-      shadowOffset: {
-         height: 0,
-         width: 0,
-      },
-      elevation: 2,
-   },
-   iconSearch: {
-      position: "absolute",
-      right: 10,
-      top: 5,
-      padding: 5,
-      backgroundColor: "#fff",
-      borderRadius: 10,
-      shadowOpacity: 0.35,
-      shadowRadius: 3,
-      shadowOffset: {
-         height: 0,
-         width: 0,
-      },
-      elevation: 2,
+      ...shadows.shadow1
    },
 });

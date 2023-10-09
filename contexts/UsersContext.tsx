@@ -1,10 +1,10 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { TSetBoolean, TUser } from "../types/others";
+import { TSetState, TUser } from "../types/others";
 
 type TUsersContext = {
   users: TUser[];
   setUsers: Dispatch<SetStateAction<TUser[]>>;
-  setIsAuthorized: TSetBoolean;
+  setIsAuthorized: TSetState<boolean>;
 };
 
 export const UsersContext = createContext<TUsersContext>({} as TUsersContext);

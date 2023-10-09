@@ -2,9 +2,7 @@ import { FC, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { UsersScreenNavigationProp } from "../types/navigationTypes";
-import { TSetState, TUser } from "../types/others";
-import { colors } from "../configs/colors";
-import { shadows } from "../configs/shadows";
+import { TUser } from "../types/others";
 import { borders } from "../configs/borders";
 import { UsersContext } from "../contexts/UsersContext";
 
@@ -13,8 +11,10 @@ type TProps = {
 };
 
 export const User: FC<TProps> = (props) => {
-  const { users, setUsers } = useContext(UsersContext);
   const { user } = props;
+
+  const { users, setUsers } = useContext(UsersContext);
+
   const navigation = useNavigation<UsersScreenNavigationProp>();
 
   const goToUserScreen = (): void => {
@@ -25,8 +25,7 @@ export const User: FC<TProps> = (props) => {
     const userId = user.id
     const newUsers = users.filter((user) => user.id !== userId);
     setUsers(newUsers);
- };
-
+  };
 
   return (
     <TouchableOpacity style={styles.container} onLongPress={deleteUser} onPress={goToUserScreen}>
@@ -44,20 +43,14 @@ export const User: FC<TProps> = (props) => {
   );
 };
 
-
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
     padding: 20,
     flexDirection: "row",
     ...borders.bordersV1
-    // padding: 15,
-    // borderRadius: 10,
-    // backgroundColor: colors.white,
-    // ...shadows.shadow1
   },
-  
+
   image: {
     width: 90,
     height: 90,

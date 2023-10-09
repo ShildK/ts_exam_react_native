@@ -11,20 +11,24 @@ type TProps = {
 };
 
 export const SignInWindow: FC<TProps> = (props) => {
-   const { users, setIsAuthorized } = useContext(UsersContext);
-   const [error, setError] = useState<string>("");
    const { signInWindowVisible, setSignInWindowVisible } = props;
 
+   const { users, setIsAuthorized } = useContext(UsersContext);
+
+   const [error, setError] = useState<string>("");
    const [email, setEmail] = useState<string>("");
    const [password, setPassword] = useState<string>("");
 
    const searchUser = (): void => {
       const user = users.find((user) => user.email === email);
-      
+
       if (user) {
          setEmail("");
          setPassword("");
-         setIsAuthorized(true);
+         setSignInWindowVisible(false);
+         setTimeout(() => {
+            setIsAuthorized(true);
+         }, 0);
       } else {
          setError("Пользователь не найден");
       }
@@ -34,7 +38,7 @@ export const SignInWindow: FC<TProps> = (props) => {
       setError("");
       setEmail("");
       setPassword("");
-      setSignInWindowVisible(!signInWindowVisible);
+      setSignInWindowVisible(false);
    };
 
    return (

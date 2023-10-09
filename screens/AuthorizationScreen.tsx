@@ -1,36 +1,12 @@
-import { useContext, useState, FC } from "react";
+import { useState, FC } from "react";
 import { ImageBackground, StyleSheet, Text } from "react-native";
 
 import { ButtonV1 } from "../components/ButtonV1";
 import { Layout } from "../components/Layout";
-import { ModalWindow } from "../components/ModalWindow";
-import { UsersContext } from "../contexts/UsersContext";
 import { SignInWindow } from "../components/SignInWindow";
-import { colors } from "../configs/colors";
-// import { BackgroundDetails } from "../components/BackgroundDetails";
-// import { ImageBackgroundV1 } from "../components/ImageBacgroundV1";
 
 export const AuthorizationScreen: FC = () => {
-   const { users, setIsAuthorized } = useContext(UsersContext);
-   // const [error, setError] = useState<string>("");
-   // const [modalVisible, setModalVisible] = useState<boolean>(false);
-
-   const [signInWindowVisible, setSignInWindowVisible] =
-      useState<boolean>(false);
-   //  const [email, setEmail] = useState<string>("");
-   //  const [password, setPassword] = useState<string>("");
-   //  const [error, setError] = useState<string>("");
-
-   // const searchUser = (): void => {
-   //    const user = users.find((user) => user.email === email);
-
-   //    if (user) {
-   //       setIsAuthorized(true);
-   //    } else {
-   //       setModalVisible(true);
-   //       setError("Пользователь не найден");
-   //    }
-   // };
+   const [signInWindowVisible, setSignInWindowVisible] = useState<boolean>(false);
 
    return (
       <Layout style={{ alignItems: "center", padding: 0 }}>
@@ -47,15 +23,8 @@ export const AuthorizationScreen: FC = () => {
          <SignInWindow
             signInWindowVisible={signInWindowVisible}
             setSignInWindowVisible={setSignInWindowVisible}
-            // setModalVisible={setModalVisible}
-            // setError={setError}
          />
-         {/* <ModalWindow
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            error={error}
-            setError={setError}
-         /> */}
+
          <ButtonV1
             style={styles.button}
             title="Login"

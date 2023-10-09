@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { TStyled } from "../types/others";
 import { colors } from "../configs/colors";
 
-
 type TProps = TStyled & {
   title: string;
   onPress: () => void;
@@ -12,6 +11,7 @@ type TProps = TStyled & {
 
 export const ButtonV1: FC<TProps> = (props) => {
   const { title, onPress, disabled, style } = props;
+  
   return (
     <TouchableOpacity
       style={[styles.button, style]}
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    color: "#fff",
+    color: colors.white,
     fontWeight: "500",
   },
 });
